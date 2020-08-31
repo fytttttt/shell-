@@ -1,0 +1,10 @@
+#!/bin/bash 
+User=创建你的备份专用用户
+Pass=专用用户的密码
+BakDir=/data/mysql/backup
+LogFile=/data/mysql/backup/bak.log
+Date=`date "+%G-%m-%d_%H:%M:%S"`
+cd $BakDir
+DumpFile=$Date.sql
+/mysql/bin/mysqldump -u$User -p$Pass --all-databases --flush-logs  --single-transaction > $DumpFile  2>&1
+find /data/mysql/backup -name "*.sql" -mtime +7 -exec rm -rf {} \;
