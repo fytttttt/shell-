@@ -1,0 +1,23 @@
+#!/bin/bash
+name=dfajslkdfjlejfaef
+decide() {
+    count=`cat $name`
+    if [ $count -eq 0 ];then
+    echo "stopd....."
+    else
+    echo "runing....."
+    fi
+}
+ps -ef |grep nginx |grep -v grep| wc -l > $name
+echo "------nginx------"
+decide
+ps -ef |grep mysql |grep -v grep| wc -l > $name
+echo "------mysql------"
+decide
+ps -ef |grep redis |grep -v grep| wc -l > $name
+echo "------redis------"
+decide
+ps -ef |grep minio |grep -v grep| wc -l > $name
+echo "------minio------"
+decide
+rm -rf $name
