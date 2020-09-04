@@ -1,0 +1,15 @@
+#!/bin/sh
+week=`date "+%u"`
+today=`date "+%Y%m%d"`
+source=/source
+backup=/backup
+
+cd $backup
+
+if [ $week -eq 1 ]; then
+rm -rf snapshot
+tar -g snapshot -zcPf "full$today.tar.gz" $source
+else
+tar -g snapshot -zcPf "inc$today.tar.gz" $source
+fi
+find /miniobackup -name "*.tar.gz" -mtime +7 -exec rm -rf {} \;
